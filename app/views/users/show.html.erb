@@ -20,5 +20,15 @@
       </ol>
       <%= will_paginate @microposts %>
     <% end %>
+ 
+
+    <%= render 'follow_form' if signed_in? %>
+    <% if @user.bucketlists.any? %>
+      <h3>Bucket Lists (<%= @user.bucketlists.count %>)</h3>
+      <ol class="bucketlists">
+        <%= render @bucketlists %>
+      </ol>
+      <%= will_paginate @bucketlists %>
+    <% end %>
   </div>
 </div>

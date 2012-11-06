@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120308215846) do
+ActiveRecord::Schema.define(:version => 20121105215714) do
+
+  create_table "bucket_items", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "bucketlist_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "bucketlists", :force => true do |t|
+    t.string   "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "bucketlists", ["created_at"], :name => "index_bucketlists_on_created_at"
 
   create_table "microposts", :force => true do |t|
     t.string   "content"

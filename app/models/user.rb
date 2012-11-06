@@ -9,6 +9,11 @@ class User < ActiveRecord::Base
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
 
+  has_many :bucketitems, :class_name => 'BucketItem', foreign_key: "user_id"
+  has_many :bucketlists, through: :bucketitems
+
+
+
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
 
@@ -21,6 +26,10 @@ class User < ActiveRecord::Base
 
   def feed
     Micropost.from_users_followed_by(self)
+  end
+  
+  def feed_bucketlist
+    Bucketlist.from_users_followed_by(self)
   end
 
   def following?(other_user)
